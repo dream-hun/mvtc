@@ -33,6 +33,18 @@ export default function Authenticated({
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    href={route('departments.index')}
+                                    active={route().current('departments.*')}
+                                >
+                                    Departments
+                                </NavLink>
+                                <NavLink
+                                    href={route('students.index')}
+                                    active={route().current('students.*')}
+                                >
+                                    Students
+                                </NavLink>
                             </div>
                         </div>
 
@@ -136,6 +148,12 @@ export default function Authenticated({
                             active={route().current('dashboard')}
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('departments.index')}
+                            active={route().current('departments.*')}
+                        >
+                            Departments
                         </ResponsiveNavLink>
                     </div>
 
