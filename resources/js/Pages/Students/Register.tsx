@@ -1,7 +1,6 @@
 import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
@@ -37,7 +36,7 @@ export default function Register({ departments }: RegisterProps) {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('students.store'), {
+        post(route('student.apply'), {
             onSuccess: () => {
                 reset();
                 toast({

@@ -14,6 +14,7 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/student-application',[RegistrationController::class, 'create'])->name('student.application');
+Route::post('/store-application',[RegistrationController::class,'store'])->name('student.apply');
 
 Route::get('/apply', [StudentController::class, 'create'])->name('students.create');
 Route::post('/apply', [StudentController::class, 'store'])->name('students.store');
