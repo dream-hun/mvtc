@@ -15,6 +15,7 @@ class RegistrationController extends Controller
 
         return Inertia::render('Students/Register', ['departments' => $departments]);
     }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
