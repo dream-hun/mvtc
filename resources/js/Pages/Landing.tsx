@@ -18,10 +18,13 @@ export default function Landing() {
                                 <div className="hidden sm:mb-10 sm:flex">
                                     <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                                         March 2025 Intake is now open.{' '}
-                                        <a href="#apply" className="whitespace-nowrap font-semibold text-indigo-600">
+                                        <Link href={route('student.application')}  className="whitespace-nowrap font-semibold text-indigo-600">
                                             <span className="absolute inset-0" aria-hidden="true" />
-                                            Apply now <span aria-hidden="true">&rarr;</span>
-                                        </a>
+                                                Apply now <span aria-hidden="true">&rarr;
+
+                                            </span>
+                                        </Link>
+
                                     </div>
                                 </div>
                                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
@@ -32,7 +35,7 @@ export default function Landing() {
                                     Our industry-focused programs prepare you for real-world success.
                                 </p>
                                 <div className="mt-10 flex items-center gap-x-6">
-                                    <Link href={route('students.create')}>
+                                    <Link href={route('student.application')}>
                                         <Button size="lg">
                                             Start Your Journey
                                             <ArrowRight className="ml-2 h-4 w-4" />
@@ -72,7 +75,7 @@ export default function Landing() {
                         <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
                             <div className="flex flex-col">
                                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                                    <GraduationCap className="h-5 w-5 flex-none text-indigo-600" />
+                                    <GraduationCap className="h-5 w-5 flex-none text-red-600" />
                                     Expert Instructors
                                 </dt>
                                 <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
@@ -83,7 +86,7 @@ export default function Landing() {
                             </div>
                             <div className="flex flex-col">
                                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                                    <BookOpen className="h-5 w-5 flex-none text-indigo-600" />
+                                    <BookOpen className="h-5 w-5 flex-none text-red-600" />
                                     Practical Training
                                 </dt>
                                 <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
@@ -94,7 +97,7 @@ export default function Landing() {
                             </div>
                             <div className="flex flex-col">
                                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                                    <Users className="h-5 w-5 flex-none text-indigo-600" />
+                                    <Users className="h-5 w-5 flex-none text-red-600" />
                                     Career Support
                                 </dt>
                                 <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
@@ -107,31 +110,8 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
-
-            {/* CTA Section */}
-            <div className="bg-gray-500" id="apply">
-                <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Ready to start your journey?
-                        <br />
-                        Apply for admission today.
-                    </h2>
-                    <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-                    <Link href={route('students.create')}>
-                        <Button size="lg">
-                            Apply Now
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                        </Link>
-                        <a href="#contact" className="text-sm font-semibold leading-6 text-gray-900">
-                            Contact Us <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {/* Programs Preview Section */}
-            <div className="bg-white py-24 sm:py-32" id="programs">
+             {/* Programs Preview Section */}
+             <div className="bg-gray-100 py-24 sm:py-32" id="programs">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Programs</h2>
@@ -180,6 +160,30 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
+
+            {/* CTA Section */}
+            <div className="bg-white/100" id="apply">
+                <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                        Ready to start your journey?
+                        <br />
+                        Apply for admission today.
+                    </h2>
+                    <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
+                    <Link href={route('student.application')}>
+                        <Button size="lg">
+                            Apply Now
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                        </Link>
+                        <a href="#contact" className="text-sm font-semibold leading-6 text-gray-900">
+                            Contact Us <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
         </>
     );
 }
@@ -232,6 +236,16 @@ const programs = [
         description:
             'Learn the latest hair styling and beauty techniques to start your career in the beauty industry.',
         imageUrl: '/images/beauty-aesthetics.webp',
+        intake: '2025-03-03',
+        duration: '6 Months',
+    },
+    {
+        id:6,
+        title: 'Photography and Videography',
+        href: '#',
+        description:
+            'Master the art of photography and videography with our hands-on training program.',
+        imageUrl: '/images/photography.webp',
         intake: '2025-03-03',
         duration: '6 Months',
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -12,6 +13,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
     ]);
 });
+Route::get('/student-application',[RegistrationController::class, 'create'])->name('student.application');
 
 Route::get('/apply', [StudentController::class, 'create'])->name('students.create');
 Route::post('/apply', [StudentController::class, 'store'])->name('students.store');

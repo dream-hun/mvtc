@@ -49,9 +49,7 @@ class DepartmentController extends Controller
     /**
      * Display the specified department.
      */
-    public function show(Department $department)
-    {
-    }
+    public function show(Department $department) {}
 
     /**
      * Show the form for editing the specified department.
