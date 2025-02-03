@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Observers;
 
 use App\Models\Student;
@@ -10,8 +9,10 @@ class StudentObserver
 {
     public function created(Student $student)
     {
-        User::chunk(2,function ($user) use ($student){
-            $user->notify(new NewStudentNotification($student));
+        User::chunk(2, function ($users) use ($student) {  // $users is a collection
+            foreach ($users as $user) {  // Loop through each user
+                $user->notify(new NewStudentNotification($student));
+            }
         });
     }
 }
