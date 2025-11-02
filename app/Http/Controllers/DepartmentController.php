@@ -11,12 +11,31 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the departments.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::latest()->paginate(10);
-
+        $query = Department::query();
+        
+        // Apply search filter
+        if ($request->filled('search')) {
+            $query->search($request->get('search'));
+        }
+        
+        // Apply sorting
+        $sortField = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+        
+        // Validate sort field to prevent SQL injection
+        $allowedSortFields = ['name', 'duration', 'status', 'created_at'];
+        if (in_array($sortField, $allowedSortFields)) {
+            $query->orderBy($sortField, $sortDirection);
+        } else {
+            // Default sorting
+            $query->latest();
+        }
+        
         return Inertia::render('Departments/Index', [
-            'departments' => $departments,
+            'departments' => $query->paginate(10)->withQueryString(),
+            'filters' => $request->only(['search', 'sort', 'direction']),
         ]);
     }
 

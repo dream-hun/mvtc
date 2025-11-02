@@ -35,10 +35,38 @@ class StudentController extends Controller
             ->with('success', 'Your application has been submitted successfully! We will contact you soon.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = Student::with('department');
+        
+        // Apply search filter
+        if ($request->filled('search')) {
+            $query->search($request->get('search'));
+        }
+        
+        // Apply sorting
+        $sortField = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+        
+        // Validate sort field to prevent SQL injection
+        $allowedSortFields = ['name', 'email', 'created_at', 'gender'];
+        if (in_array($sortField, $allowedSortFields)) {
+            if ($sortField === 'department') {
+                // Sort by department name
+                $query->join('departments', 'students.department_id', '=', 'departments.id')
+                      ->orderBy('departments.name', $sortDirection)
+                      ->select('students.*');
+            } else {
+                $query->orderBy($sortField, $sortDirection);
+            }
+        } else {
+            // Default sorting
+            $query->latest();
+        }
+        
         return Inertia::render('Students/Index', [
-            'students' => Student::with('department')->paginate(10),
+            'students' => $query->paginate(10)->withQueryString(),
+            'filters' => $request->only(['search', 'sort', 'direction']),
         ]);
     }
 
